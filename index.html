@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Audrey &amp; Josh</title>
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="scroll.js"></script>
+	
+		<link href="https://fonts.googleapis.com/css?family=Cookie|Cabin" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="plx one">
+			<div id="aj" class="hidden offset"></div>
+			<div class="container">
+				<h1 class="heading one">Audrey &amp; Josh</h1>
+			</div>
+			<div class="jump-down">
+				<div class="container">
+					<div><a class="smooth" href="#details"><img src="downarrow.png" alt="Go to Details" /></a></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="nav" id="navContainer">
+			<div class="container">
+				<div class="navbar-toggle" onclick="javascript:toggleMenu();">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</div>
+				<div class="nav-mark">
+					<a class="smooth" href="#aj" onclick="javascript:hideMenu();">Audrey &amp; Josh</a>
+				</div>
+				<ul class="nav-bar" id="mainMenu" style="display: none;">
+					<li><a class="smooth" href="#details" onclick="javascript:hideMenu();">Thank you!</a></li>
+					<li><a class="smooth" href="#party" onclick="javascript:hideMenu();">Party</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="nav-filler" id="stickyPad"></div>
+		
+		<div class="plx two">
+			<div id="details" class="hidden offset"></div>
+			<div class="container">
+				<h1 class="heading two">Thank you!</h1>
+				<p style="text-align: center;">
+					Thanks for celebrating with us! 
+					We had a great time and hope you did too!
+				</p>
+			</div>
+		</div>
+		
+		<div class="plx three">
+			<div id="party" class="hidden offset"></div>
+			<div class="container">
+				<h1 class="heading three">Party</h1>
+				<div class="party left">
+					<h3 class="heading sub">Bridesmaids</h3>
+					<ul>
+						<li>Rachel C.</li>
+						<li>Emily</li>
+						<li>Jessica</li>
+						<li>Rachel S.</li>
+						<li>Mandy</li>
+						<li>Tara</li>
+					</ul>
+				</div>
+				<div class="party right">
+					<h3 class="heading sub">Groomsmen</h3>
+					<ul>
+						<li>Kyle</li>
+						<li>Lee</li>
+						<li>Nick</li>
+						<li>Curtis</li>
+						<li>Patrick</li>
+						<li>Codey</li>
+					</ul>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			window.onresize = function() {calcPositions()};
+			window.onscroll = function() {stickyNav()};
+						
+			var navBar = document.getElementById("navContainer");
+			var padBlock = document.getElementById("stickyPad");
+			var offsets = document.getElementsByClassName('offset');
+			var navBarHeight, fixPoint;
+			
+			calcPositions();
+			
+			function stickyNav() {
+				if (window.pageYOffset >= fixPoint) {
+					if (!navBar.classList.contains("sticky")) {
+						navBar.classList.add("sticky");
+						padBlock.style.display = "block";
+					}
+				}
+				else {
+					if (navBar.classList.contains("sticky")) {
+						navBar.classList.remove("sticky");
+						padBlock.style.display = "none";
+					}
+				}
+			}
+			
+			function calcPositions() {			
+				navBarHeight = (navBar.offsetHeight - 1) + "px";
+				padBlock.style.height = navBarHeight;			
+				for (var i = 0; i < offsets.length; i++) {
+					offsets[i].style.top = "-" + navBarHeight;
+				}
+			
+				var startSticky = navBar.classList.contains("sticky");
+				if (startSticky) {
+					navBar.classList.remove("sticky");
+					padBlock.style.height = "0";
+				}
+				fixPoint = navBar.offsetTop;
+				if (startSticky) {
+					navBar.classList.add("sticky");
+					padBlock.style.height = navBarHeight;
+				}
+				stickyNav();
+			}
+			
+			function toggleMenu() {
+				if (document.getElementById("mainMenu").style.display == "block") {
+					document.getElementById("mainMenu").style.display = "none";
+				}
+				else if (document.getElementById("mainMenu").style.display == "none") {
+					document.getElementById("mainMenu").style.display = "block";
+				}
+			}
+			
+			function hideMenu() {
+				if (document.getElementById("mainMenu").style.display == "block") {
+					document.getElementById("mainMenu").style.display = "none";
+				}
+			}
+		</script>
+	</body>
+</html>
